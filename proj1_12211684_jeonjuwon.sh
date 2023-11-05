@@ -42,7 +42,7 @@ while  true; do
 		3)
 			read -p "Please enter the 'movie id' (1~1682): " a3
 			echo ""
-			average_rating=$(awk -F"|" -v movie_id="$a3" '$2 == movie_id {sum+=$3; count++} END {result=sum/count; printf "%.5f\n", result}' "$u_data")
+			average_rating=$(awk -F"|" -v movie_id="$a3" 'BEGIN {sum=0; count=0} $2 == movie_id {sum+=$3; count++} END {if (count>0) {result=sum/count; printf "%.5f\n", result}}' "$u_data")
 			echo "average rating of $a3: $average_rating"
 			echo ""
 			;;
